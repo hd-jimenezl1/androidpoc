@@ -1,24 +1,20 @@
 package com.nancho313.githubqueryapplication.viewmodel.album
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nancho313.githubqueryapplication.model.repository.AlbumRepository
 import com.nancho313.githubqueryapplication.model.repository.dto.Album
 
 class ListAlbumViewModel: ViewModel() {
 
-    private val repository: AlbumRepository = AlbumRepository()
+    val albums: MutableLiveData<List<Album>> by lazy {
+        MutableLiveData()
+    }
 
-    private var albums:MutableList<Album> = mutableListOf()
+    private val repository: AlbumRepository = AlbumRepository()
 
     suspend fun loadAlbums() {
 
-        albums.clear()
-        albums.addAll(repository.getAlbums())
+        albums.value = repository.getAlbums()
     }
-
-    fun getAlbums(): List<Album> {
-
-        return albums
-    }
-
 }
