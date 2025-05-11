@@ -12,7 +12,7 @@ interface AlbumDAO {
     @Query("SELECT * FROM album")
     fun getAll(): List<AlbumEntity>
 
-    @Insert
+    @Upsert
     fun save(album: AlbumEntity)
 
     @Upsert
